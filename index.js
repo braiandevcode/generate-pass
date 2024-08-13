@@ -5,6 +5,9 @@ const d = document,
     $btnGenerate = d.getElementById("btn-generate"),
     allowedCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/=!@#$%^&*()_[]{}|;:,.<>?~';
 
+
+    const vectorChar = allowedCharacters.split("");
+    
 // variables globales
 let min = 8;
 let max = 20;
@@ -80,10 +83,11 @@ const createModalPassword = ()=>{
     const template = d.getElementById("template-pass").content;
     const clone = template.cloneNode(true);
     updateAddOrRemoveOrToggleClass(clone.querySelector("div"), "add", "modal-copy", "d-flex", "ai-center", "fd-column")
-    updateAddOrRemoveOrToggleClass(clone.querySelector("div"), "add", "modal-copy", "d-flex", "ai-center", "fd-column", "jc-center")
+    updateAddOrRemoveOrToggleClass(clone.querySelector(".modal-copy__container-copy"), "add", "modal-copy", "d-flex", "ai-center", "fd-column", "jc-center")
     updateAddOrRemoveOrToggleClass(clone.querySelector("h3"),"add", "modal-copy__copy-pass", "d-flex", "ai-center", "jc-center");
     clone.querySelector("h3").setAttribute("title", "Copiar");
-
+    updateAddOrRemoveOrToggleClass(clone.querySelector(".message-info"), "add", "d-flex", "ai-center", "jc-center")
+    clone.querySelector(".message-info").textContent = "Click sobre contraseña para copiar.";
     clone.querySelector("h3").textContent = pass;
     clone.querySelector("button").textContent="Cancelar";
 
@@ -96,7 +100,7 @@ const setPasswordCharacter = ()=>{
         const generate = generatePassword(allowedCharacters.length);
         pass+=allowedCharacters.charAt(generate);
     };
-};
+}
 
 // FUNCION PARA COPIAR CONTRASEÑA EN EL PORTAPAPELES
 const copyPassword=(texto)=> {
@@ -118,6 +122,10 @@ const evaluateHandleClick = (e)=>{
         $btnGenerate.setAttribute("disabled", "true");
         setPasswordCharacter(e);
         renderModal();
+
+        // setInterval(()=>{
+        //     updateAddOrRemoveOrToggleClass(d.querySelector(".message-info"), "add", "message-info--hide");
+        // },5000);
     };
     
     if (e.target.id === "btn-cancel" || e.target.matches(".modal-copy__copy-pass")) {
