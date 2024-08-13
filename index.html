@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de contraseñas</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body class="d-flex ai-center fd-column jc-center">
+    <div class="container d-flex ai-center fd-column">
+        <h1>Generador de contraseñas</h1>
+        <div id="pass" class="modal modal--hide d-flex ai-center jc-center"></div>
+        <h4 id="pass-length"></h4>
+        <div class="container-range d-flex ai-center fd-column">
+            <label class="label">Elige un rango de longitud para la contraseña.</label>
+            <input id="range" type="range" placeholder="Eligue un rango">
+        </div>
+        <button type="button" id="btn-generate" class="btn">Generar</button>
+    </div>
+    <template id="template-pass">
+        <div>
+            <h3></h3>
+            <button type="button" id="btn-cancel" class="btn"></button>
+        </div>
+    </template>
+    <script type="module" src="/index.js"></script>
+</body>
+</html>

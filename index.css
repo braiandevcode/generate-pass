@@ -1,0 +1,163 @@
+*,
+::after,
+::before{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body{
+    font-family: sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    background-color:#271e1ece;
+    color: #FFF;
+}
+h1{
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.d-flex{
+    display: flex;
+}
+.jc-center{
+    justify-content: center;
+}
+
+.ai-center{
+    align-items: center;
+}
+
+.fd-column{
+    flex-direction: column;
+}
+
+.fd-row{
+    flex-direction: row;
+}
+
+.btn{
+    border: none;
+    padding: .8rem 1.5rem;
+    border-radius: 20px;
+}
+.btn,
+.modal-copy__copy-pass{
+    cursor: pointer;
+}
+
+.container{
+    width: 95%;
+    padding: 3rem .6rem;
+    border-radius: 10px;
+    background: #310633;
+    gap: 2rem;
+}
+
+.container-range{
+    gap: 1.3rem;
+}
+
+.modal{
+    position: fixed;
+    inset: 0;
+    background: transparent;
+    color: #FFF;
+    transform: translateX(0);
+    transition:  transform .7s ease-in;
+}
+
+.modal--hide{
+    transform: translateX(-150%);
+}
+
+.modal-copy{
+    width: 90%;
+    min-height: 40vh;
+    height: auto;
+    gap: 1rem;
+    padding:1rem;
+    background: #390992d5;
+}
+.modal-copy__copy-pass{
+    width: 90%;
+    background: #f3127be0;
+    padding: .8rem;
+    opacity: .9;
+    transition: opacity .9s ease-in, transform .9s ease-in;
+    transform: scale(.9);
+    font-size: .9rem;
+    position: relative;
+}
+
+.modal-copy__copy-pass::after,
+.modal-copy__copy-pass::before{
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease-in-out, visibility .2s ease-in-out;
+    
+}
+.modal-copy__copy-pass::after{
+    content: "Haz click sobre el boton para copiar.";
+    top: -.6rem;
+    right: -8.9rem;
+    width: 130px;
+    height: 80px;
+    background: #052911d7;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    padding: .7rem;
+    border-radius:15px;
+    font-size: .7rem;
+}
+
+
+.modal-copy__copy-pass::before{
+    content: "";
+    right: -.8rem;
+    bottom: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid #052911d7;
+    border-bottom: 20px solid transparent;
+    border-top: 20px solid transparent;
+}
+
+.btn-generate--hide{
+    visibility: hidden;
+    opacity: 0;
+}
+
+@media screen and (min-width:920px){
+    h1{
+        font-size: 1.6rem;
+    }
+    .container{
+        width: 80%;
+    }
+    .modal-copy{
+        width: 50%;
+        min-height: 30vh;
+    }
+
+    .modal-copy__copy-pass{
+        width: 50%;
+    }
+}
+
+@media (hover :hover) and (pointer: fine){
+    .modal-copy__copy-pass:hover{
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+    .modal-copy__copy-pass:hover.modal-copy__copy-pass::after,
+    .modal-copy__copy-pass:hover.modal-copy__copy-pass::before{
+        opacity: 1;
+        visibility: visible;
+    }
+}
