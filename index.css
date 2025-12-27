@@ -96,7 +96,7 @@ h1 {
   background: rgb(250, 250, 250);
   color: #fff;
   transform: translateX(0);
-  transition: transform 0.2s ease-in;
+  transition: transform 0.2rs ease-in;
 }
 
 .modal--hide {
