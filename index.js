@@ -3,14 +3,12 @@ const d = document,
     $textLengthPass = d.getElementById("pass-length"),
     $rangeElement= d.getElementById("range"),
     $btnGenerate = d.getElementById("btn-generate"),
-    allowedCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/=!@#$%^&*()_[]{}|;:,.<>?~';
-
-
-    const vectorChar = allowedCharacters.split("");
+    allowedCharacters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+-*/=!@#$%^&*()_[]{}|;:,.<>?~',
+    vectorChar = allowedCharacters.split(""),
+    MIN = 8,
+    MAX = 20;
     
-// variables globales
-let min = 8;
-let max = 20;
+// VARIABLES GLOBALES
 let pass = "";
 let lengthPassword=16;
 
@@ -46,8 +44,8 @@ const updateAddOrRemoveOrToggleClass = (el, method, ...className)=>{
 
 // INICIALIZAR VALORES DE RANGO
 const initializeRanges= ()=>{
-    $rangeElement.max = max;
-    $rangeElement.min = min;
+    $rangeElement.max = MAX;
+    $rangeElement.min = MIN;
     $rangeElement.value = lengthPassword;
     $textLengthPass.textContent= `Longitud de: ${$rangeElement.value}`;
 };
@@ -58,10 +56,10 @@ const showLength = () => $textLengthPass.textContent= `Longitud de: ${lengthPass
 // FUNCION QUE PREVIENE QUE SE MODIFIQUEN CAMBIOS EN LINEA EN EL RANGO
 const evaluateValuesRange = (e)=>{
     lengthPassword = parseInt(e.target.value);
-    if (lengthPassword > max || lengthPassword < min) {
+    if (lengthPassword > MAX || lengthPassword < MIN) {
         $range.setAttribute("disabled", "true");
-        $range.max = max;
-        $range.min = min;
+        $range.max = MAX;
+        $range.min = MIN;
         e.preventDefault();
     };
 };
@@ -87,7 +85,7 @@ const createModalPassword = ()=>{
     updateAddOrRemoveOrToggleClass(clone.querySelector("h3"),"add", "modal-copy__copy-pass", "d-flex", "ai-center", "jc-center");
     clone.querySelector("h3").setAttribute("title", "Copiar");
     updateAddOrRemoveOrToggleClass(clone.querySelector(".message-info"), "add", "d-flex", "ai-center", "jc-center")
-    clone.querySelector(".message-info").textContent = "Click sobre contraseña para copiar.";
+    clone.querySelector(".message-info").textContent = "Clickea o toca sobre la contraseña para copiar.";
     clone.querySelector("h3").textContent = pass;
     clone.querySelector("button").textContent="Cancelar";
 
@@ -104,7 +102,10 @@ const setPasswordCharacter = ()=>{
 
 // FUNCION PARA COPIAR CONTRASEÑA EN EL PORTAPAPELES
 const copyPassword=(texto)=> {
-    navigator.clipboard.writeText(texto)
+    const { clipboard } = navigator; //DESETRUCTURO NAVIGATOR
+
+    //COPIAR EL TEXTO
+    clipboard.writeText(texto)
         .then(() => {
            alert("Contraseña copiada exitosamente!.")
         })
@@ -122,10 +123,6 @@ const evaluateHandleClick = (e)=>{
         $btnGenerate.setAttribute("disabled", "true");
         setPasswordCharacter(e);
         renderModal();
-
-        // setInterval(()=>{
-        //     updateAddOrRemoveOrToggleClass(d.querySelector(".message-info"), "add", "message-info--hide");
-        // },5000);
     };
     
     if (e.target.id === "btn-cancel" || e.target.matches(".modal-copy__copy-pass")) {
